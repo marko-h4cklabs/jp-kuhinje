@@ -79,21 +79,6 @@
     }
   }
 
-  /* ---------- subtle parallax on band ---------- */
-  var band = document.querySelector('.band__media');
-  if (band && !reduce) {
-    var ticking = false;
-    window.addEventListener('scroll', function () {
-      if (ticking) return; ticking = true;
-      requestAnimationFrame(function () {
-        var r = band.parentElement.getBoundingClientRect();
-        var prog = (r.top + r.height / 2 - window.innerHeight / 2) / window.innerHeight;
-        band.style.transform = 'translate3d(0,' + (Math.max(-1,Math.min(1,prog)) * -40).toFixed(1) + 'px,0)';
-        ticking = false;
-      });
-    }, { passive: true });
-  }
-
   /* ---------- lightbox ---------- */
   var lb = document.getElementById('lightbox');
   var lbImg = lb.querySelector('img');
