@@ -15,8 +15,8 @@
       el.placeholder = el.getAttribute('data-ph-' + lang);
     });
     document.title = lang === 'en'
-      ? 'JP Kuhinje — Outdoor kitchens with character'
-      : 'JP Kuhinje — Vanjske kuhinje s karakterom';
+      ? 'JP Kuhinje | Outdoor kitchens with character'
+      : 'JP Kuhinje | Vanjske kuhinje s karakterom';
     store('jp-lang', lang);
   }
   var saved = store('jp-lang');
@@ -150,7 +150,7 @@
       '',
       data.message
     ].join('\n');
-    window.location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent('Upit — ' + data.edition + ' — ' + data.name) + '&body=' + encodeURIComponent(body);
+    window.location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent('Upit: ' + data.edition + ', ' + data.name) + '&body=' + encodeURIComponent(body);
     note.textContent = t('Otvaramo vaš e-mail program…', 'Opening your e-mail app…');
   });
 
