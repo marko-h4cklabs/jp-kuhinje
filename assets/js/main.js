@@ -97,14 +97,6 @@
   lb.addEventListener('click', function (e) { if (e.target !== lbImg) closeLb(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lb.hidden) closeLb(); });
 
-  /* ---------- edition links prefill form ---------- */
-  document.querySelectorAll('[data-edition]').forEach(function (a) {
-    a.addEventListener('click', function () {
-      var r = document.querySelector('input[name="edition"][value="' + a.dataset.edition + '"]');
-      if (r) r.checked = true;
-    });
-  });
-
   /* ---------- enquiry form ----------
      Sends via the visitor's e-mail client (mailto). To receive submissions
      directly, point FORM_ENDPOINT at a form service (e.g. Formspree, Netlify
@@ -129,7 +121,6 @@
       email: form.elements.email.value.trim(),
       phone: form.elements.phone.value.trim(),
       location: form.elements.location.value.trim(),
-      edition: (form.querySelector('input[name="edition"]:checked') || {}).value || '',
       message: form.elements.message.value.trim()
     };
 
@@ -146,11 +137,10 @@
       'E-mail: ' + data.email,
       'Telefon / Phone: ' + data.phone,
       'Lokacija / Location: ' + data.location,
-      'Izvedba / Edition: ' + data.edition,
       '',
       data.message
     ].join('\n');
-    window.location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent('Upit: ' + data.edition + ', ' + data.name) + '&body=' + encodeURIComponent(body);
+    window.location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent('Upit: ' + data.name + (data.location ? ', ' + data.location : '')) + '&body=' + encodeURIComponent(body);
     note.textContent = t('Otvaramo vaš e-mail program…', 'Opening your e-mail app…');
   });
 
