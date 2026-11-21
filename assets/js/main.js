@@ -66,6 +66,10 @@
   var counters = document.querySelectorAll('[data-count]');
   var scrambles = document.querySelectorAll('[data-scramble]');
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function setFactsH() { if (facts) root.style.setProperty('--facts-h', facts.offsetHeight + 'px'); }
+  setFactsH();
+  window.addEventListener('resize', setFactsH);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(setFactsH);
   if (facts && !reduceMotion && 'IntersectionObserver' in window) {
     counters.forEach(function (el) { el.textContent = '0' + (el.dataset.suffix || ''); });
     var LETTERS = 'ABCDEFGHIJKLMNOPRSTUVZ';
@@ -89,7 +93,7 @@
       })(start);
     };
     var fio = new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting) { fio.disconnect(); setTimeout(runFacts, 250); }
+      if (entries[0].isIntersecting) { fio.disconnect(); setTimeout(runFacts, 500); }
     }, { threshold: 0.4 });
     fio.observe(facts);
   }
