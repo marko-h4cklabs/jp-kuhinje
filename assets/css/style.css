@@ -95,7 +95,6 @@ html[data-lang="en"] [data-l="hr"]{display:none!important}
 .hero__content > *{max-width:540px}
 .hero__content{width:100%;padding-bottom:90px;padding-top:120px}
 .hero__title{font-family:var(--serif);font-size:clamp(52px,7vw,108px);line-height:.98;letter-spacing:-.015em;margin:26px 0 28px;max-width:11ch}
-.hero__lead{max-width:540px;font-size:clamp(16px,1.3vw,18px);color:var(--cream-2);font-weight:300}
 .hero__actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:40px}
 .hero__scroll{position:absolute;right:var(--gut);bottom:44px;width:1px;height:80px;background:rgba(241,234,223,.25);overflow:hidden}
 .hero__scroll span{position:absolute;left:0;top:-40%;width:1px;height:40%;background:var(--wood-2);animation:scrollLine 2.4s var(--ease) infinite}
@@ -106,7 +105,7 @@ html[data-lang="en"] [data-l="hr"]{display:none!important}
 .stats{display:grid;grid-template-columns:repeat(4,1fr)}
 .stat{padding:38px 24px 40px 0;display:flex;flex-direction:column;gap:8px;color:var(--mute);font-size:14px;line-height:1.5}
 .stat + .stat{padding-left:28px;border-left:1px solid var(--line)}
-.stat strong{font-family:var(--serif);font-weight:400;font-size:clamp(40px,4vw,58px);line-height:1;color:var(--cream)}
+.stat strong{font-family:var(--serif);font-weight:400;font-variant-numeric:lining-nums tabular-nums;font-size:clamp(40px,4vw,58px);line-height:1;color:var(--cream)}
 
 /* ---------- reveal / video section ---------- */
 .reveal-sec{padding:clamp(90px,12vw,160px) 0;background:var(--char);position:relative;overflow:hidden}

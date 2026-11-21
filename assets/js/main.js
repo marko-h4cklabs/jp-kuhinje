@@ -61,6 +61,39 @@
     items.forEach(function (el) { el.classList.add('is-in'); });
   }
 
+  /* ---------- key facts: count up ---------- */
+  var facts = document.querySelector('.facts');
+  var counters = document.querySelectorAll('[data-count]');
+  var scrambles = document.querySelectorAll('[data-scramble]');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (facts && !reduceMotion && 'IntersectionObserver' in window) {
+    counters.forEach(function (el) { el.textContent = '0' + (el.dataset.suffix || ''); });
+    var LETTERS = 'ABCDEFGHIJKLMNOPRSTUVZ';
+    scrambles.forEach(function (el) { el.style.opacity = '.35'; });
+    var runFacts = function () {
+      var dur = 2000, start = performance.now();
+      var ease = function (x) { return 1 - Math.pow(1 - x, 4); };
+      (function tick(now) {
+        var k = Math.min(1, (now - start) / dur), e = ease(k);
+        counters.forEach(function (el) {
+          el.textContent = Math.round(e * Number(el.dataset.count)) + (el.dataset.suffix || '');
+        });
+        scrambles.forEach(function (el) {
+          var word = el.dataset.scramble;
+          el.style.opacity = String(.35 + .65 * e);
+          el.textContent = k < 1 ? word.split('').map(function (ch, i) {
+            return k > .55 + i * .15 ? ch : LETTERS[Math.floor(Math.random() * LETTERS.length)];
+          }).join('') : word;
+        });
+        if (k < 1) requestAnimationFrame(tick);
+      })(start);
+    };
+    var fio = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { fio.disconnect(); setTimeout(runFacts, 250); }
+    }, { threshold: 0.4 });
+    fio.observe(facts);
+  }
+
   /* ---------- video ---------- */
   var video = document.getElementById('revealVideo');
   var phone = video && video.closest('.phone');
